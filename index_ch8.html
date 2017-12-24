@@ -1,0 +1,4 @@
+{% for file in files %}
+<h1><a href="{{url_for('file',file_id=file.id)}}" taget="_blank">{{file.title}}</a></h1>
+<div>{{file.tags}}</div>
+{%endfor%}

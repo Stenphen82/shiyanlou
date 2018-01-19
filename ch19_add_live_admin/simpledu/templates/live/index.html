@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Live{% endblock %}
+
+{%block body %}
+<div class='row'>
+    <div class="col-md-9">
+        <video id="videoElement" width="100%" height="500px" controls="controls"></video>
+    </div>
+    <div class="col-md-3">
+	{% for live in lives %}
+          <p>{{ live.name }} - {{ live.anchor.username }}</p>
+        {% endfor %}
+ 
+    </div>
+</div>
+
+{% endblock %}
+
+{% block tail_js %}
+{{super()}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.3.3/flv.min.js"></script>
+<script>
+if (flvjs.isSupported()){
+    var videoElement = document.getElementById('videoElement');
+    var flvPlayer = flvjs.createPlayer({
+            type:'flv',
+            isLive: true,
+            url: '://data.bilibili.com/log/web?0005161516114055754home|1.2.5|346|311582|true|961F2fer-6j2a-4KX9-wz7k-J7CcCr1QXJED|0|0|https%3A%2F%2Fqn.live-play.acgvideo.com%2Flive-qn%2F453715%2Flive_1519784_7889363.flv%3FwsSecret%3De103afc2c4bdeaaf280cc5ed5ac245a6%26wsTime%3D1516115843|10|0'
+            });
+    flvPlayer.attacheMediaElement(videoElement);
+    flvPlayer.load();
+    flvPlayer.play();
+}
+</script>
+    
+
+
+{%endblock%}
